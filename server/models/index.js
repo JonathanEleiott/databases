@@ -2,43 +2,43 @@ var db = require('../db');
 
 module.exports = {
   messages: {
-    get: function () {
-      db.dbConnection.connect();
-
-      db.dbConnection.end();
+    get: function (req, res) {
+      console.log('req', req);
+      var queryString = 'SELECT * FROM messages';
+      db.dbConnection.query(queryString, function(err, rows, fields) {
+        console.log('GET fields', fields);
+        var rowsArr = [];
+        rows = JSON.stringify(rows);
+        console.log('GET rows', rows);
+        res.end(rows);
+      });
     }, // a function which produces all the messages
 
-    post: function () {
-      db.dbConnection.connect();
-
-      db.dbConnection.end();
+    post: function (req, res) {
+      var queryString = 'INSERT INTO messages SET ?';
+      db.dbConnection.query(queryString, req.body, function(err, rows, fields) {
+        if (err) {
+          console.log('error is ', err);
+        }
+        res.end();
+      });
     } // a function which can be used to insert a message into the database
   },
 
   users: {
     // Ditto as above.
     get: function () {
-      db.dbConnection.connect();
 
-      db.dbConnection.end();
     },
 
-    post: function (userObj) {
-      // db.dbConnection();
-      db.dbConnection.connect();
+    post: function (req, res) {
 
-      var queryString = 'SELECT * FROM messages';
-      db.dbConnection.query(queryString, function(err, rows, fields) {
+      var queryString = 'INSERT INTO messages SET ?';
+      db.dbConnection.query(queryString, req.body, function(err, rows, fields) {
         if (err) {
           console.log('error is ', err);
         }
-
-        for (var i in rows) {
-          console.log('Post Titles: ', rows[i].post_title);
-        }
       });
-
-      db.dbConnection.end();
     }
   }
 };

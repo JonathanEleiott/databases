@@ -6,48 +6,25 @@ CREATE DATABASE chat;
 
 USE chat;
 
+-- ---
+-- Globals
+-- ---
+
 -- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- SET FOREIGN_KEY_CHECKS=0;
 
 -- ---
--- Table 'Messages'
+-- Table 'messages'
 -- 
 -- ---
 
-DROP TABLE IF EXISTS `Messages`;
+DROP TABLE IF EXISTS `messages`;
     
-CREATE TABLE `Messages` (
+CREATE TABLE `messages` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `usernameId` INT NULL DEFAULT NULL,
-  `time` TIMESTAMP NULL DEFAULT NULL,
-  `roomId` INTEGER NULL DEFAULT NULL,
-  `text` CHAR(70) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'Room'
--- 
--- ---
-
-DROP TABLE IF EXISTS `Room`;
-    
-CREATE TABLE `Room` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `name` VARCHAR(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'User'
--- 
--- ---
-
-DROP TABLE IF EXISTS `User`;
-    
-CREATE TABLE `User` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `username` CHAR NULL DEFAULT NULL,
+  `username` CHAR(20) NULL DEFAULT NULL,
+  `message` CHAR(70) NULL DEFAULT NULL,
+  `roomname` CHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -55,27 +32,19 @@ CREATE TABLE `User` (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `Messages` ADD FOREIGN KEY (usernameId) REFERENCES `User` (`id`);
-ALTER TABLE `Messages` ADD FOREIGN KEY (roomId) REFERENCES `Room` (`id`);
 
 -- ---
 -- Table Properties
 -- ---
 
--- ALTER TABLE `Messages` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Room` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `User` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `messages` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
 -- ---
 
--- INSERT INTO `Messages` (`id`,`usernameId`,`time`,`roomId`,`text`) VALUES
--- ('','','','','');
--- INSERT INTO `Room` (`id`,`name`) VALUES
--- ('','');
--- INSERT INTO `User` (`id`,`username`) VALUES
--- ('','');
+-- INSERT INTO `messages` (`id`,`username`,`text`,`roomname`) VALUES
+-- ('','','','');
 
 /* Create other tables and define schemas for them here! */
 
